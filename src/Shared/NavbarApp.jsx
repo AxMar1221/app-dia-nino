@@ -4,9 +4,9 @@ import ScoreboardIcon from '@mui/icons-material/Scoreboard';
 
 export const NavBarApp = () => {
   return (
-    <>
-      <AppBar color='success'>
-        <Container maxWidth='xl'>
+    <div className='container mb-5'>
+      <AppBar color='error' >
+        <Container >
           <Toolbar
             disableGutters
             sx={{ display: 'flex', justifyContent: 'center'}}
@@ -46,7 +46,7 @@ export const NavBarApp = () => {
           </Toolbar>
         </Container>
       </AppBar>
-    </>
+    </div>
   )
 }
 

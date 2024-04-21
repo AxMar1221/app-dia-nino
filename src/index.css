@@ -27,17 +27,11 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  color: #d42f2f;
 }
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
 }
 .container {
   margin: 10px;
@@ -52,9 +46,6 @@ h1 {
 .avatar-github {
   border-radius: 50%;
   width: 35px;
-}
-.footer {
-  color: #2e7d32;
 }
 .progressBar {
   width: 100%;
