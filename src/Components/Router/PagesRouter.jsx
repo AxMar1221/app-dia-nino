@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom"
-import { AuthApp, GrafIndiApp, GraficaApp, HomeApp } from "../components"
+import { AuthApp, GrafIndiApp, GraficaApp, HomeApp } from "../Pages"
+
 
 export const PagesRouter = () => {
   return (

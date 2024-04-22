@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 import { FooterApp, NavBarApp } from "../Shared"
-import { PagesRouter } from "../Pages/Router"
+import { PagesRouter } from "../Components/Router"
+
 
 export const RouterApp = () => {
   return (
