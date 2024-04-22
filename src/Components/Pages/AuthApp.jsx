@@ -23,16 +23,16 @@ export const AuthApp = () => {
         });
     }
 
-  return (
-    <>
-        <Button
-            variant='outlined'
-            color='primary'
-            onClick={handleLogout}
-        >
+    return (
+        <>
+            <Button
+                variant='outlined'
+                color='primary'
+                onClick={handleLogout}
+            >
 
-        <Typography sx={{ ml: 1 }} color='error'>Cerrar sesión</Typography>
-        </Button>
-    </>
-  )
+                <Typography sx={{ ml: 1 }} color='error'>Cerrar sesión</Typography>
+            </Button>
+        </>
+    )
 }

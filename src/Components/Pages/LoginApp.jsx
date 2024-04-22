@@ -58,7 +58,7 @@ export const LoginApp = () => {
             fullWidth
             name='email'
             value={email}
-            onChange={(e) =>setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </Grid>
         <Grid item xs={12} sx={{ mt: 2 }}>

@@ -9,7 +9,7 @@ export const NavBarApp = () => {
         <Container >
           <Toolbar
             disableGutters
-            sx={{ display: 'flex', justifyContent: 'center'}}
+            sx={{ display: 'flex', justifyContent: 'center' }}
           >
             <MenuItem sx={{ borderRadius: 3 }}>
               <NavLink
