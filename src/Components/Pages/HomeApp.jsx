@@ -7,7 +7,7 @@ export const HomeApp = () => {
       <Card>
           <CardMedia
             sx={{ height: 350, borderRadius: 5}}
-            image='assets/dia-nino-img.png'
+            image='/dia-nino-img.png'
             title='día-niño'
           />
       </Card>

@@ -23,11 +23,3 @@ export const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 export const analytics = getAnalytics(app);
 
-// import { getAuth, signOut } from "firebase/auth";
-
-// const auth = getAuth();
-// signOut(auth).then(() => {
-//   // Sign-out successful.
-// }).catch((error) => {
-//   // An error happened.
-// });
