@@ -13,12 +13,13 @@ export const AuthApp = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log('Usuario:', user);
+        // console.log('Usuario:', user);
         Swal.fire({
           icon: 'success',
           title: 'Inicio de sesión exitoso',
           text: `Hola: ${user.email}`
         });
+        handleCancel();
       })
       .catch((error) => {
         const errorCode = error.code;
