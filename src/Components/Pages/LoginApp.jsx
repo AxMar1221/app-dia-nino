@@ -1,9 +1,9 @@
 import { Button, Grid, TextField, Typography } from "@mui/material"
 import { useState } from "react"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { app } from "../../Firebase/Firebase";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { app } from "../../Firebase/Firebase";
 
 export const LoginApp = () => {
   const [email, setEmail] = useState('');

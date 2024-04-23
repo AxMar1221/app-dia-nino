@@ -30,7 +30,6 @@ export const AuthApp = () => {
                 color='primary'
                 onClick={handleLogout}
             >
-
                 <Typography sx={{ ml: 1 }} color='error'>Cerrar sesión</Typography>
             </Button>
         </>
