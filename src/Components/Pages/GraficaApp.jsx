@@ -1,20 +1,32 @@
 import { Button, Grid, Typography, LinearProgress, Card, CardContent } from "@mui/material";
 import { NavigateBeforeOutlined, NavigateNextOutlined } from '@mui/icons-material';
-import { useState } from "react";
-import { updatedData } from "./data";
+import { useEffect, useState } from "react";
+import { fetchData, processGameData } from "./data";
 
 export const GraficaApp = () => {
+  const [newData, setNewData] = useState([]); // Agrega un estado para newData
+
+  useEffect(() => {
+    const loadData = async () => {
+      const jsonData = await fetchData();
+      if (jsonData) {
+        const newData = processGameData(jsonData);
+        setNewData(newData);
+      }
+    };
+    loadData();
+  }, []);
 
   const itemsPerPage = 5;
-  const totalPages = Math.ceil(updatedData.length / itemsPerPage);
+  const totalPages = Math.ceil(newData.length / itemsPerPage);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const ranks = updatedData.slice().sort((a, b) => b.points - a.points);
+  const ranks = newData.slice().sort((a, b) => b.points - a.points);
   const startRank = (currentPage - 1) * itemsPerPage;
   const endRank = currentPage * itemsPerPage;
   const rankSort = ranks.slice(startRank, endRank);
 
-  const nextPape = () => {
+  const nextPage = () => {
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   }
 
@@ -50,7 +62,7 @@ export const GraficaApp = () => {
             <Button
               variant='outlined'
               color='error'
-              onClick={nextPape}
+              onClick={nextPage}
               disabled={currentPage === totalPages}
               style={{ marginLeft: "10px" }}
             >
