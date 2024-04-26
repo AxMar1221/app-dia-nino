@@ -23,15 +23,16 @@ export const processGameData = (jsonData) => {
     if (Object.hasOwnProperty.call(groupsData, groupKey)) {
       const groupData = groupsData[groupKey];
       let totalPoints = 0;
+      const games = {};
 
-      for (const gameKey in groupData) {
-        if (Object.hasOwnProperty.call(groupData, gameKey)) {
-          const points = groupData[gameKey];
+      for (const activityKey in groupData) {
+        if (Object.hasOwnProperty.call(groupData, activityKey)) {
+          const points = groupData[activityKey];
           totalPoints += points;
+          games[activityKey] = points;
         }
       }
-
-      groupsArray.push({ grupo: groupKey, points: totalPoints });
+      groupsArray.push({ grupo: groupKey, points: totalPoints, games });
     }
   }
 
