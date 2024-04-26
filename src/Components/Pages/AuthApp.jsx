@@ -77,7 +77,16 @@ export const AuthApp = () => {
         const updateData = { ...jsonData };
         updateData.grupo[selectedGroup][selectedGame] = updatePoints;
         setJasonData(updateData);
-        console.log(updateData);
+        console.log(selectedGroup, selectedGame, updatePoints);
+        Swal.fire({
+            icon: 'success',
+            title: `Punto agregado exitosamente a: ${selectedGroup}`,
+            text: `En: ${selectedGame}. Un total de: ${updatePoints} puntos.`,
+            showCancelButton: true,
+            confirmButtonText: 'Ok',
+            cancelButtonText: 'Cancelar',
+            timer: 5000
+        })
     }
 
     const handleLogout = () => {
