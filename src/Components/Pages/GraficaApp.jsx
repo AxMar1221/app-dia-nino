@@ -36,7 +36,7 @@ export const GraficaApp = () => {
 
   return (
     <div className='container mt-5'>
-      <Typography align='center' variant='h4' color='error'>
+      <Typography align='center' variant='h4' color='error' sx={{ mb: 2}}>
         Gráfica general
       </Typography>
       <Card>

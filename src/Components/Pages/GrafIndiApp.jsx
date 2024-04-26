@@ -22,10 +22,10 @@ export const GrafIndiApp = () => {
   };
 
   const selectedGroupData = newData.find(item => item.grupo === selectedGroup);
-  console.log(selectedGroupData)
+  // console.log(selectedGroupData)
   return (
     <div className='container mt-5'>
-      <Typography align='center' variant='h5' color='error'>
+      <Typography align='center' variant='h5' color='error' sx={{ mb: 2}}>
         Gráfica por grupo
       </Typography>
       <Card>

@@ -14,7 +14,6 @@ export const fetchData = async () => {
     }
   };
   
-
 export const processGameData = (jsonData) => {
   const groupsData = jsonData.grupo; // Accede a la data de los grupos
   const groupsArray = [];
@@ -38,4 +37,3 @@ export const processGameData = (jsonData) => {
 
   return groupsArray;
 };
-
