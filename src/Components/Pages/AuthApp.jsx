@@ -1,6 +1,7 @@
 import { Button, Card, CardContent, FormControl, Grid, MenuItem, Select, Typography } from "@mui/material"
 import { getAuth, signOut } from "firebase/auth";
 import { app } from "../../Firebase/Firebase";
+import { getDatabase, ref, set } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
@@ -10,8 +11,8 @@ export const AuthApp = () => {
     const auth = getAuth(app);
     const navigate = useNavigate();
     const [groupsData, setGroupsData] = useState([]);
-    const [selectedGroup, setSelectedGroup] = useState('2A');
-    const [selectedGame, setSelectedGame] = useState('Avion');
+    const [selectedGroup, setSelectedGroup] = useState('');
+    const [selectedGame, setSelectedGame] = useState('');
     const [jsonData, setJasonData] = useState(null);
     const [dataLoaded, setDataLoaded] = useState(false);
 
@@ -77,16 +78,33 @@ export const AuthApp = () => {
         const updateData = { ...jsonData };
         updateData.grupo[selectedGroup][selectedGame] = updatePoints;
         setJasonData(updateData);
-        console.log(selectedGroup, selectedGame, updatePoints);
-        Swal.fire({
-            icon: 'success',
-            title: `Punto agregado exitosamente a: ${selectedGroup}`,
-            text: `En: ${selectedGame}. Un total de: ${updatePoints} puntos.`,
-            showCancelButton: true,
-            confirmButtonText: 'Ok',
-            cancelButtonText: 'Cancelar',
-            timer: 5000
+        console.log(updateData, selectedGroup, selectedGame, updatePoints);
+
+
+        const db = getDatabase();
+        const groupRef = ref(db, `Juegos/grupo/${selectedGroup}/${selectedGame}`);
+        set(groupRef, updatePoints)
+        .then(() => {
+            Swal.fire({
+                icon: 'success',
+                title: `Punto agregado exitosamente a: ${selectedGroup}`,
+                text: `En: ${selectedGame}. Un total de: ${updatePoints} puntos.`,
+                showCancelButton: true,
+                confirmButtonText: 'Ok',
+                cancelButtonText: 'Cancelar',
+                timer: 5000
+            });
         })
+        .catch((error) => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Algo salio mal!',
+                text: `Mensaje ${error}`,
+                showCloseButton: true,
+                timer: 5000
+            });
+        })
+
     }
 
     const handleLogout = () => {
