@@ -78,7 +78,7 @@ export const AuthApp = () => {
         const updateData = { ...jsonData };
         updateData.grupo[selectedGroup][selectedGame] = updatePoints;
         setJasonData(updateData);
-        console.log(updateData, selectedGroup, selectedGame, updatePoints);
+        // console.log(updateData, selectedGroup, selectedGame, updatePoints);
 
 
         const db = getDatabase();

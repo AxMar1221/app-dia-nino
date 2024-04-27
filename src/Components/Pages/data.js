@@ -6,10 +6,16 @@ export const fetchData = async () => {
       }
       const jsonData = await response.json();
       const data = jsonData;
-      console.log(data);
+      // console.log(data);
       return jsonData;
     } catch (error) {
-      console.error('Error fetching data:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'No se estableció conexión a la base de datos',
+        text: `Mensaje ${error}`,
+        showCloseButton: true,
+        timer: 5000
+    });
       return null;
     }
   };
