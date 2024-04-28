@@ -44,8 +44,8 @@ export const GraficaApp = () => {
           <Grid container direction='row' alignItems='flex-end' rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             {rankSort.map((item) => (
               <Grid item key={item.grupo} className='progressBar' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <LinearProgress color='error' variant="determinate" value={(item.points / 250) * 100} sx={{ width: '100%', height: 10, borderRadius: 1 }} />
-                <Typography variant='subtitle1' color='error' elevation={24}>{`${item.grupo}: ${item.points}`}</Typography>
+                <LinearProgress color='error' variant="determinate" value={(item.points / 100) * 100} sx={{ width: '100%', height: 15, borderRadius: 1 }} />
+                <Typography variant='subtitle1' color='error' elevation={24}>{`${item.grupo} a ganado un total de "${item.points}" puntos `}</Typography>
               </Grid>
             ))}
           </Grid>
@@ -66,7 +66,8 @@ export const GraficaApp = () => {
               disabled={currentPage === totalPages}
               style={{ marginLeft: "10px" }}
             >
-              Siguiente <NavigateNextOutlined />
+              Siguiente 
+              <NavigateNextOutlined />
             </Button>
           </div>
         </CardContent>

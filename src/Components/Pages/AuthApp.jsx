@@ -88,7 +88,7 @@ export const AuthApp = () => {
             Swal.fire({
                 icon: 'success',
                 title: `Punto agregado exitosamente a: ${selectedGroup}`,
-                text: `En: ${selectedGame}. Un total de: ${updatePoints} puntos.`,
+                text: `En la actividad: ${selectedGame}.`,
                 showCancelButton: true,
                 confirmButtonText: 'Ok',
                 cancelButtonText: 'Cancelar',
