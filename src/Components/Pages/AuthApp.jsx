@@ -180,27 +180,25 @@ export const AuthApp = () => {
                             </FormControl>
                         </Grid>
                         <Grid item xs={12}>
+                                <RemoveCircleIcon 
+                                    fontSize='large'
+                                    color='error'
+                                    onClick={handleRestPoint}
+                                />
+
                             <Button
-                                variant='text'
-                                color='error'
-                                onClick={handleRestPoint}
-                            >
-                                <RemoveCircleIcon color='error' />
-                            </Button>
-                            <Button
+                                size='small'
                                 variant='outlined'
                                 color='primary'
                                 onClick={handlePoint}
                             >
-                                <Typography sx={{ ml: 1 }} color='error'>Agregar puntos: {pointsToAdd}</Typography>
+                                <Typography sx={{ ml: 1 }} color='error'>Sumar puntos: {pointsToAdd}</Typography>
                             </Button>
-                            <Button
-                                variant='text'
-                                color='error'
-                                onClick={handleAddPoint}
-                            >
-                                <AddCircleIcon color='error' />
-                            </Button>
+                                <AddCircleIcon 
+                                    fontSize='large'
+                                    color='error' 
+                                    onClick={handleAddPoint}
+                                />
                         </Grid>
                         <Grid item xs={12}>
                             <Button
