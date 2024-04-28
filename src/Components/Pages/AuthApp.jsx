@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, FormControl, Grid, MenuItem, Select, Typography } from "@mui/material"
+import { Button, Card, CardContent, FormControl, Grid, Input, MenuItem, Select, Typography } from "@mui/material"
 import { getAuth, signOut } from "firebase/auth";
 import { app } from "../../Firebase/Firebase";
 import { getDatabase, ref, set } from "firebase/database";
@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import { fetchData, processGameData } from "./data";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
 export const AuthApp = () => {
     const auth = getAuth(app);
@@ -15,6 +17,7 @@ export const AuthApp = () => {
     const [selectedGame, setSelectedGame] = useState('');
     const [jsonData, setJasonData] = useState(null);
     const [dataLoaded, setDataLoaded] = useState(false);
+    const [pointsToAdd, setPointsToAdd] = useState(1);
 
     useEffect(() => {
         if (!dataLoaded) {
@@ -74,37 +77,47 @@ export const AuthApp = () => {
             return;
         }
 
-        const updatePoints = selectedActivityPoints + 1;
+        const updatePoints = selectedActivityPoints + pointsToAdd;
         const updateData = { ...jsonData };
         updateData.grupo[selectedGroup][selectedGame] = updatePoints;
         setJasonData(updateData);
         // console.log(updateData, selectedGroup, selectedGame, updatePoints);
 
-
         const db = getDatabase();
         const groupRef = ref(db, `Juegos/grupo/${selectedGroup}/${selectedGame}`);
         set(groupRef, updatePoints)
-        .then(() => {
-            Swal.fire({
-                icon: 'success',
-                title: `Punto agregado exitosamente a: ${selectedGroup}`,
-                text: `En la actividad: ${selectedGame}.`,
-                showCancelButton: true,
-                confirmButtonText: 'Ok',
-                cancelButtonText: 'Cancelar',
-                timer: 5000
-            });
-        })
-        .catch((error) => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Algo salio mal!',
-                text: `Mensaje ${error}`,
-                showCloseButton: true,
-                timer: 5000
-            });
-        })
+            .then(() => {
+                Swal.fire({
+                    icon: 'success',
+                    title: `Puntos agregados exitosamente a: ${selectedGroup}`,
+                    text: `En la actividad: ${selectedGame}.`,
+                    showCancelButton: true,
+                    confirmButtonText: 'Ok',
+                    cancelButtonText: 'Cancelar',
+                    timer: 5000
+                });
+            })
+            .catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Algo salio mal!',
+                    text: `Mensaje ${error}`,
+                    showCloseButton: true,
+                    timer: 5000
+                });
+            })
+    }
 
+    const handleAddPoint = () => {
+        if (pointsToAdd < 10) {
+            setPointsToAdd(pointsToAdd + 1);
+        }
+    }
+
+    const handleRestPoint = () => {
+        if (pointsToAdd > 1) {
+            setPointsToAdd(pointsToAdd - 1);
+        }
     }
 
     const handleLogout = () => {
@@ -124,7 +137,7 @@ export const AuthApp = () => {
 
     return (
         <div className='container mt-5'>
-            <Typography align='center' variant='h4' color='error' sx={{ mb: 2}}>
+            <Typography align='center' variant='h4' color='error' sx={{ mb: 2 }}>
                 Sumar puntos
             </Typography>
             <Card>
@@ -132,12 +145,12 @@ export const AuthApp = () => {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <FormControl fullWidth color='error'>
+                                <Typography sx={{ ml: 1, mb: 1 }} color='error'>Grupo</Typography>
                                 <Select
-                                    placeholder='Grupo'
-                                    id='group-select'
                                     value={selectedGroup}
                                     onChange={(e) => setSelectedGroup(e.target.value)}
                                     fullWidth
+                                    color='error'
                                 >
                                     {groupsData.map((group) => (
                                         <MenuItem key={group.grupo} value={group.grupo}>{group.grupo}</MenuItem>
@@ -147,9 +160,8 @@ export const AuthApp = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <FormControl fullWidth color='error'>
+                                <Typography sx={{ ml: 1, mb: 1 }} color='error'>Actividad</Typography>
                                 <Select
-                                    placeholder='Juego'
-                                    id='game-select'
                                     value={selectedGame}
                                     onChange={(e) => setSelectedGame(e.target.value)}
                                     fullWidth
@@ -169,11 +181,25 @@ export const AuthApp = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <Button
+                                variant='text'
+                                color='error'
+                                onClick={handleRestPoint}
+                            >
+                                <RemoveCircleIcon color='error' />
+                            </Button>
+                            <Button
                                 variant='outlined'
                                 color='primary'
                                 onClick={handlePoint}
                             >
-                                <Typography sx={{ ml: 1 }} color='error'>Agregar punto</Typography>
+                                <Typography sx={{ ml: 1 }} color='error'>Agregar puntos: {pointsToAdd}</Typography>
+                            </Button>
+                            <Button
+                                variant='text'
+                                color='error'
+                                onClick={handleAddPoint}
+                            >
+                                <AddCircleIcon color='error' />
                             </Button>
                         </Grid>
                         <Grid item xs={12}>
